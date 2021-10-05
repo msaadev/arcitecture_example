@@ -1,3 +1,4 @@
+import 'package:arcitecture_example/view/home/model/user_model.dart';
 import 'package:arcitecture_example/view/home/service/home_service.dart';
 import 'package:mobx/mobx.dart';
 part 'home_view_model.g.dart';
@@ -8,7 +9,7 @@ abstract class _HomeViewModelBase with Store {
 
 
 
-  Future get getUsers async {
+  Future<BaseModel> get getUsers async {
     return HomeService().getUsers;
   }
 }

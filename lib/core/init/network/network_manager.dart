@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -12,13 +13,12 @@ class NetworkManager {
 
   NetworkManager._init() {
     final BaseOptions baseOptions = BaseOptions(
-        baseUrl: 'https://jsonplaceholder.typicode.com/',
-        contentType: 'application/json; charset=utf-8');
+      baseUrl: 'https://reqres.in/api/',
+    );
     _dio = Dio(baseOptions);
-   
   }
 
- late final Dio _dio;
+  late final Dio _dio;
 
   Future? dioGet(
     String path,
@@ -28,9 +28,10 @@ class NetworkManager {
   }
 
   Future? dioPost({required String path, required Map data}) async {
-    final response = await _dio.post(path,
-        data: data,
-       );
+    final response = await _dio.post(
+      path,
+      data: data,
+    );
     return ifElse(response);
   }
 

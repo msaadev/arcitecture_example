@@ -1,3 +1,5 @@
+import 'package:arcitecture_example/core/components/cards/user_card.dart';
+import 'package:arcitecture_example/view/home/model/user_model.dart';
 import 'package:arcitecture_example/view/home/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -32,22 +34,23 @@ class _HomeState extends State<Home> {
         future: _viewModel.getUsers,
         builder: (
           BuildContext _,
-          AsyncSnapshot snapshot,
+          AsyncSnapshot<BaseModel?> snapshot,
         ) {
           if (snapshot.hasData) {
             return ListView.builder(
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data?.data?.length,
               itemBuilder: (_, index) {
-                var item = snapshot.data[index];
-                return Text(item['name']);
+                var item = snapshot.data?.data?[index];
+
+                return UserCard(item: item);
               },
             );
           } else if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text('Hata Tekrar deneyiniz'),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
