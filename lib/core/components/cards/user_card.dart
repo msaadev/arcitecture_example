@@ -26,20 +26,14 @@ class UserCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ClipOval(child: CahceImage(link: item?.avatar ?? '')),
+            _buildImage(),
             Expanded(
                 child: Padding(
               padding: 5.paddingAll,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(item?.firstName ?? ''),
-                      5.wSized,
-                      Text(item?.lastName ?? ''),
-                    ],
-                  ),
+                  _buildName(),
+                  Expanded(child: _buildEmail())
                 ],
               ),
             )),
@@ -47,4 +41,19 @@ class UserCard extends StatelessWidget {
         ));
     ;
   }
+
+  ClipOval _buildImage() => ClipOval(child: CahceImage(link: item?.avatar ?? ''));
+
+  Row _buildName() {
+    return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(item?.firstName ?? ''),
+                    5.wSized,
+                    Text(item?.lastName ?? ''),
+                  ],
+                );
+  }
+
+  Center _buildEmail() => Center(child: Text(item?.email ?? ''));
 }

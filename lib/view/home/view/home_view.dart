@@ -27,35 +27,43 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: FutureBuilder(
-        future: _viewModel.getUsers,
-        builder: (
-          BuildContext _,
-          AsyncSnapshot<BaseModel?> snapshot,
-        ) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data?.data?.length,
-              itemBuilder: (_, index) {
-                var item = snapshot.data?.data?[index];
+      appBar: _buildAppBar(),
+      body: _buildBody(),
+    );
+  }
 
-                return UserCard(item: item);
-              },
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('Hata Tekrar deneyiniz'),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: const Text('Home'),
+    );
+  }
+
+  FutureBuilder<BaseModel> _buildBody() {
+    return FutureBuilder(
+      future: _viewModel.getUsers,
+      builder: (
+        BuildContext _,
+        AsyncSnapshot<BaseModel?> snapshot,
+      ) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data?.data?.length,
+            itemBuilder: (_, index) {
+              var item = snapshot.data?.data?[index];
+
+              return UserCard(item: item);
+            },
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Hata Tekrar deneyiniz'),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }
