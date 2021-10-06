@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       locale:const Locale('tr', 'TR'),
       navigatorKey: NavigationService.instance.navigatorKey,
       localizationsDelegates: const {DefaultWidgetsLocalizations.delegate},
-      title: 'Engelsiz Yollar',
+      title: ' Architecture Example',
       home: const Home(),
     );
   }
